@@ -2,7 +2,11 @@ package crc32itu
 
 import "hash"
 
-// Code extracted from golang bzip2
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Code extracted from golang compress/bzip2
 
 // This is a standard CRC32 like in hash/crc32 except that all the shifts are reversed,
 // causing the bits in the input to be processed in the reverse of the usual order.
