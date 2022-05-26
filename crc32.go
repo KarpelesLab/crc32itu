@@ -40,6 +40,18 @@ func updateCRC(val uint32, b []byte) uint32 {
 	return ^crc
 }
 
+// Checksum returns the ITU I.363.5 checksum of data.
+func Checksum(data []byte) uint32 {
+	return updateCRC(0, data)
+}
+
+// Update returns the result of adding the bytes in p to the crc.
+func Update(crc uint32, data []byte) uint32 {
+	return updateCRC(crc, data)
+}
+
+// New returns a new instance of hash.Hash32 that can be used to compute CRC32
+// values using this standard interface.
 func New() hash.Hash32 {
 	return &crc32digest{}
 }
