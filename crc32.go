@@ -11,6 +11,8 @@ import "hash"
 // This is a standard CRC32 like in hash/crc32 except that all the shifts are reversed,
 // causing the bits in the input to be processed in the reverse of the usual order.
 
+const Size = 4
+
 var crctab [256]uint32
 
 func init() {
@@ -46,7 +48,7 @@ type crc32digest struct {
 	crc uint32
 }
 
-func (d *crc32digest) Size() int { return 4 }
+func (d *crc32digest) Size() int { return Size }
 
 func (d *crc32digest) BlockSize() int { return 1 }
 
