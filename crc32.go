@@ -1,3 +1,17 @@
+// Package crc32itu implements the ITU I.363.5 CRC-32 algorithm (also known as
+// AAL5 CRC). This algorithm was popularised by BZIP2 and is also used in ATM
+// transmissions.
+//
+// This package is particularly useful for interoperability with PHP, as it
+// produces the same output as PHP's hash('crc32', ...) function. Go's standard
+// library hash/crc32 uses a different polynomial and bit ordering, making it
+// incompatible with PHP's crc32 hash.
+//
+// The polynomial used is 0x04C11DB7, with reversed bit shifts compared to the
+// IEEE polynomial used in hash/crc32.
+//
+// The algorithm is the same as that in POSIX 1003.2-1992 cksum, except cksum
+// appends the message length to the CRC at the end.
 package crc32itu
 
 import "hash"
@@ -8,9 +22,7 @@ import "hash"
 
 // Code extracted from golang compress/bzip2
 
-// This is a standard CRC32 like in hash/crc32 except that all the shifts are reversed,
-// causing the bits in the input to be processed in the reverse of the usual order.
-
+// Size is the size of a CRC-32 checksum in bytes.
 const Size = 4
 
 var crctab [256]uint32
